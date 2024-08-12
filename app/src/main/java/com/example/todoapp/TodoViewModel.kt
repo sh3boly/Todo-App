@@ -5,8 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.todoapp.database.Todo
 import com.example.todoapp.database.TodoDatabase
-import com.example.todoapp.model.TodoModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class TodoViewModel(app: Application) : AndroidViewModel(app) {
@@ -19,5 +19,5 @@ class TodoViewModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch(Dispatchers.IO) { db.todoDao().delete(todo) }
     }
 
-    fun getTodos() = db.todoDao().getAll()
+    fun getTodos(): Flow<List<Todo>> = db.todoDao().getAll()
 }

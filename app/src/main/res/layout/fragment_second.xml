@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="text"
-            android:text="Title" />
+            android:hint="Title" />
 
         <EditText
             android:id="@+id/descriptionInput"
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="text"
-            android:text="Description" />
+            android:hint="Description" />
 
         <LinearLayout
             android:layout_width="match_parent"

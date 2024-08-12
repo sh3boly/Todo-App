@@ -5,15 +5,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.todoapp.model.TodoModel
+import com.example.todoapp.database.Todo
 
-class MyAdapter(private val todoList: ArrayList<TodoModel>) :
+class MyAdapter(private var todoList: List<Todo>) :
     RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.recycler_view_row, parent, false)
         return MyViewHolder(itemView)
+    }
+    fun updateDate(newTodos: List<Todo>){
+        todoList = newTodos
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {
