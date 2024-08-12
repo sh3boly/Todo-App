@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +16,7 @@ import com.google.android.material.snackbar.Snackbar
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class FirstFragment : Fragment() {
+class HomeFragment : Fragment() {
 
     private lateinit var newList: ArrayList<TodoModel>
     private lateinit var titles: Array<String>
@@ -28,7 +29,11 @@ class FirstFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
+        binding.fab.setOnClickListener { _ ->
+            findNavController().navigate(R.id.SecondFragment)
+        }
         return binding.root
     }
 
