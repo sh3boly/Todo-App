@@ -3,26 +3,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/HomeFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/HomeFragment"
         android:name="com.example.todoapp.HomeFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        android:label="Todo App"
+        tools:layout="@layout/home_fragment">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            app:destination="@id/AddTodoFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_editTodoFragment"
+            app:destination="@id/EditTodoFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
+        android:id="@+id/AddTodoFragment"
         android:name="com.example.todoapp.AddTodoFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        android:label="Add Todo"
+        tools:layout="@layout/add_todo_fragment">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            app:destination="@id/HomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/EditTodoFragment"
+        android:name="com.example.todoapp.EditTodoFragment"
+        android:label="Edit Todo"
+        tools:layout="@layout/edit_todo_fragment" >
+        <action
+            android:id="@+id/action_editTodoFragment_to_FirstFragment"
+            app:destination="@id/HomeFragment" />
+        <argument
+            android:name="todoID"
+            app:argType="integer" />
     </fragment>
 </navigation>

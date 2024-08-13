@@ -9,8 +9,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Switch
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.todoapp.database.Todo
-import com.example.todoapp.databinding.FragmentSecondBinding
+import com.example.todoapp.databinding.AddTodoFragmentBinding
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -18,7 +19,7 @@ import com.example.todoapp.databinding.FragmentSecondBinding
 class AddTodoFragment : Fragment() {
     private lateinit var viewModel: TodoViewModel
 
-    private var _binding: FragmentSecondBinding? = null
+    private var _binding: AddTodoFragmentBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -29,7 +30,7 @@ class AddTodoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentSecondBinding.inflate(inflater, container, false)
+        _binding = AddTodoFragmentBinding.inflate(inflater, container, false)
         return binding.root
 
     }
@@ -67,5 +68,6 @@ class AddTodoFragment : Fragment() {
     ) {
         val newTodo = Todo(title = title, description = description, status = status)
         viewModel.upsertTodo(newTodo)
+        findNavController().navigateUp()
     }
 }

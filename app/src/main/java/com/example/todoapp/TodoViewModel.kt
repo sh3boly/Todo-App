@@ -20,4 +20,6 @@ class TodoViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun getTodos(): Flow<List<Todo>> = db.todoDao().getAll()
+
+    fun getTodo(id: Int): Flow<Todo> = db.todoDao().getTodo(id)
 }

@@ -17,4 +17,8 @@ interface TodoDao {
     @Delete
     fun delete(todo: Todo)
 
+
+    @Query("SELECT * FROM Todo WHERE id = :id")
+    fun getTodo(id: Int): Flow<Todo>
+
 }
