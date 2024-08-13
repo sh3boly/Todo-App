@@ -26,7 +26,7 @@ import kotlinx.coroutines.launch
  */
 class HomeFragment : Fragment() {
     private lateinit var viewModel: TodoViewModel
-    private lateinit var newList: List<Todo>
+    private var newList: List<Todo> = emptyList()
 
     private var _binding: HomeFragmentBinding? = null
     private val binding get() = _binding!!
@@ -47,7 +47,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(TodoViewModel::class.java)
-
         val newRecyclerview = binding.mRecyclerView
         newRecyclerview.layoutManager = LinearLayoutManager(context)
         newRecyclerview.setHasFixedSize(true)
@@ -59,10 +58,17 @@ class HomeFragment : Fragment() {
 
         lifecycleScope.launch {
             viewModel.getTodos().collect { todos ->
-                newList = todos
+                newList = newList + todos
                 myAdapter.updateDate(todos)
             }
         }
+        lifecycleScope.launch {
+            viewModel.todos.collect { todos ->
+                newList = newList + viewModel.listTodoMapper(viewModel.todos.value)
+                myAdapter.updateDate(newList)
+            }
+        }
+
 
         val swipeCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
