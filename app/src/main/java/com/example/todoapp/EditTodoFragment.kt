@@ -10,6 +10,7 @@ import android.widget.Switch
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.todoapp.database.Todo
 import com.example.todoapp.databinding.EditTodoFragmentBinding
@@ -54,6 +55,7 @@ class EditTodoFragment : Fragment() {
             val status = view.findViewById<Switch>(R.id.completedStatus).isChecked
             if (title.isNotBlank() && description.isNotBlank()) {
                 viewModel.upsertTodo(Todo(todoID, title, description, status))
+                findNavController().navigateUp()
             }
 
         }

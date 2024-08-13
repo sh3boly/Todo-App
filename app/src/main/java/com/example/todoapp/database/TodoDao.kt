@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TodoDao {
-    @Query("SELECT * FROM Todo")
+    @Query("SELECT * FROM Todo ORDER BY id DESC")
     fun getAll(): Flow<List<Todo>>
 
     @Upsert
@@ -20,5 +20,8 @@ interface TodoDao {
 
     @Query("SELECT * FROM Todo WHERE id = :id")
     fun getTodo(id: Int): Flow<Todo>
+
+    @Query("DELETE FROM Todo")
+    suspend fun deleteAll()
 
 }

@@ -23,7 +23,9 @@ class TodoViewModel(app: Application) : AndroidViewModel(app) {
     init {
         getTodoApi()
     }
-
+    private fun deleteAllDB(){
+        viewModelScope.launch(Dispatchers.IO) { db.todoDao().deleteAll() }
+    }
     private val db: TodoDatabase = TodoDatabase.getInstance(app)
     fun upsertTodo(todo: Todo) {
         viewModelScope.launch(Dispatchers.IO) { db.todoDao().upsertTodo(todo) }
@@ -60,6 +62,7 @@ class TodoViewModel(app: Application) : AndroidViewModel(app) {
 
 fun apiTodoMapper(todo: TodoModel): Todo {
     return Todo(
+        id = todo.id.toInt(),
         title = "Api Todo",
         description = todo.title,
         status = todo.completed
